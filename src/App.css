@@ -21,7 +21,7 @@ body {
   overflow-x: hidden; }
 
 main {
-  padding: 30px; }
+  padding: 50px; }
 
 a {
   transition: all 0.25s ease-in-out;
@@ -41,6 +41,13 @@ ol {
   ol li {
     list-style: none; }
 
+.notfound {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
 .NavBar {
   background: #000000;
   color: #ffffff;
@@ -57,3 +64,31 @@ ol {
   padding: 10px;
   font-size: 14px;
   border: none; }
+
+.Home {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 400px);
+  grid-gap: 30px;
+  justify-content: center; }
+
+.Video {
+  border: 1px solid #efefef;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease-in-out; }
+  .Video:hover {
+    background-color: #efefef; }
+  .Video__thumbnail {
+    width: 100%; }
+  .Video__details {
+    padding: 20px; }
+  .Video__title {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px; }
+  .Video__channel {
+    color: #777777;
+    margin-bottom: 5px; }
+  .Video__published {
+    color: #777777;
+    font-size: 12px; }

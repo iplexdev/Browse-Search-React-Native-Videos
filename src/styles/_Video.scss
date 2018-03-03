@@ -1,2 +1,31 @@
 .Video {
+  border: 1px solid #efefef;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+  @include transition;
+
+  &:hover {
+    background-color: #efefef;
+  }
+
+  &__thumbnail {
+    width: 100%;
+  }
+
+  &__details {
+    padding: 20px;
+  }
+  &__title {
+    color: $black;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  &__channel {
+    color: $grey;
+    margin-bottom: 5px;
+  }
+  &__published {
+    color: $grey;
+    font-size: 12px;
+  }
 }
