@@ -7,7 +7,7 @@ import Home from './components/Home';
 import SearchResults from './components/SearchResults';
 import Video from './components/Video';
 
-import './styles/App.css';
+import './App.css';
 
 class App extends Component {
   constructor() {
@@ -27,14 +27,17 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <NavBar />
-
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/search/:query" component={SearchResults} />
-            <Route path="/video/:videoId" component={Video} />
-            <Route render={props => <div>404 Not Found.</div>} />
-          </Switch>
+          <header>
+            <NavBar />
+          </header>
+          <main>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/search/:query" component={SearchResults} />
+              <Route path="/video/:videoId" component={Video} />
+              <Route render={props => <div>404 Not Found.</div>} />
+            </Switch>
+          </main>
         </div>
       </BrowserRouter>
     );

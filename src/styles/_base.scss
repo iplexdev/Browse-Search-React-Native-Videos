@@ -1,0 +1,50 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-stack;
+  color: $black;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+main {
+  padding: 30px;
+}
+
+a {
+  @include transition;
+  text-decoration: none;
+  display: inline-block;
+}
+
+button {
+  @include transition;
+  border: 0;
+  outline: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  li {
+    list-style: none;
+  }
+}

@@ -1,0 +1,13 @@
+.NavBar {
+  background: $black;
+  color: $white;
+  padding: 15px 20px;
+  @include flex-between;
+  align-items: center;
+
+  .home {
+    color: $white;
+    font-size: 30px;
+    font-weight: 700;
+  }
+}

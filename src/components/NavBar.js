@@ -4,10 +4,15 @@ import SearchInput from './SearchInput';
 class NavBar extends React.Component {
   render() {
     return (
-      <div className="">
-        <h1>NavBar</h1>
+      <nav className="NavBar">
+        <a href="/" className="home">
+          <span>Surf Videos </span>
+          <span role="img" aria-label="surfing">
+            🏄‍♂️
+          </span>
+        </a>
         <SearchInput />
-      </div>
+      </nav>
     );
   }
 }
