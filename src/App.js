@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import NavBar from './components/NavBar';
+import Home from './components/Home';
+import SearchResults from './components/SearchResults';
+import Video from './components/Video';
+
 import './styles/App.css';
 
 class App extends Component {
@@ -18,9 +25,18 @@ class App extends Component {
 
   render() {
     return (
-      <div className="">
-        <h1>Surf Videos</h1>
-      </div>
+      <BrowserRouter>
+        <div>
+          <NavBar />
+
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/search/:query" component={SearchResults} />
+            <Route path="/video/:videoId" component={Video} />
+            <Route render={props => <div>404 Not Found.</div>} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
