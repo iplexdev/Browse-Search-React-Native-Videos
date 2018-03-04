@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 class Video extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   videoURL(id) {
     return `/video/${id}`;
   }

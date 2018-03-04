@@ -6,6 +6,10 @@
     font-size: 30px;
     cursor: pointer;
   }
+
+  ::-webkit-input-placeholder {
+    color: white;
+  }
   input {
     @include transition;
     height: 100%;
@@ -18,7 +22,7 @@
     border-bottom: 2px solid white;
     width: 0;
     &.show {
-      width: 300px;
+      width: 250px;
       padding: 10px;
       margin-left: 10px;
     }

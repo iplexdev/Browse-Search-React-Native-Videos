@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Video from './Video';
+import Loader from './Loader';
 
 class Home extends React.Component {
   constructor() {
@@ -38,10 +39,7 @@ class Home extends React.Component {
     let _this = this;
     clearTimeout(_this.throttleTimer);
     _this.throttleTimer = setTimeout(function() {
-      console.log('scroll');
-
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        // this is being called every scroll, find a way to debounce this
         _this.getMoreVideos();
       }
     }, _this.throttleDelay);
@@ -49,6 +47,11 @@ class Home extends React.Component {
 
   getVideos(url) {
     axios.get(url).then(response => {
+      if (response.status !== 200) {
+        throw new Error('Uh oh, something went wrong');
+        return;
+      }
+
       const newVids = this.state.videos.concat(response.data.items);
 
       this.setState({
@@ -56,8 +59,8 @@ class Home extends React.Component {
         nextPageToken: response.data.nextPageToken,
       });
 
-      console.log(response);
-      console.log(this.state);
+      // console.log(response);
+      // console.log(this.state);
     });
   }
 
@@ -69,12 +72,14 @@ class Home extends React.Component {
   }
 
   render() {
-    return (
+    return this.state.videos.length ? (
       <div className="Home">
         {this.state.videos.map((item, index) => (
           <Video key={index} video={item} />
         ))}
       </div>
+    ) : (
+      <Loader />
     );
   }
 }
