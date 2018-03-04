@@ -5,10 +5,6 @@ class VideoResult extends React.Component {
     super();
   }
 
-  videoURL(id) {
-    return `/video/${id}`;
-  }
-
   render() {
     return <div className="VideoResult">videoresult</div>;
   }
