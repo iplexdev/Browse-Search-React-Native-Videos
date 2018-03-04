@@ -2,8 +2,8 @@ import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
 class SearchInput extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.onChange = this.onChange.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
@@ -15,6 +15,17 @@ class SearchInput extends React.Component {
       submitted: false,
       toggle: false,
     };
+  }
+
+  componentDidUpdate() {
+    if (this.state.toggle) {
+      document.querySelector('.SearchInput input').focus();
+    }
+  }
+
+  // toggle input by clicking on icon
+  toggleInput() {
+    this.setState({ toggle: !this.state.toggle });
   }
 
   // update query term
@@ -29,11 +40,6 @@ class SearchInput extends React.Component {
     }
   }
 
-  // toggle input by clicking on icon
-  toggleInput() {
-    this.setState({ toggle: !this.state.toggle });
-  }
-
   search() {
     this.setState({ submitted: true });
   }
@@ -46,13 +52,15 @@ class SearchInput extends React.Component {
             🔍
           </span>
         </button>
-        <input
-          type="text"
-          placeholder="Search"
-          onChange={this.onChange}
-          onKeyUp={this.onKeyUp}
-          className={this.state.toggle ? 'show' : ''}
-        />
+        <form action="" onSubmit={this.search}>
+          <input
+            type="text"
+            placeholder="Search 🤙"
+            onChange={this.onChange}
+            onKeyUp={this.onKeyUp}
+            className={this.state.toggle ? 'show' : ''}
+          />
+        </form>
         {this.state.submitted && (
           <Switch>
             <Redirect
@@ -60,6 +68,7 @@ class SearchInput extends React.Component {
                 pathname: `/search/${this.state.term}`,
                 state: { term: this.state.term },
               }}
+              push
             />
           </Switch>
         )}

@@ -2,15 +2,13 @@
   @include transition;
   border: 1px solid #efefef;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
-
   &:hover {
-    background-color: #efefef;
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
   }
-
   &__thumbnail {
     width: 100%;
   }
-
   &__details {
     padding: 20px;
   }
@@ -22,10 +20,21 @@
   }
   &__channel {
     color: $grey;
+    font-size: 15px;
+    font-weight: 500;
     margin-bottom: 7px;
   }
   &__published {
     color: $grey;
-    font-size: 12px;
+    font-size: 13px;
+  }
+  &__description {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $grey;
+    font-size: 13px;
+    margin-top: 20px;
   }
 }

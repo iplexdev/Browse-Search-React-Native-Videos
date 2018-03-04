@@ -49,7 +49,6 @@ class Home extends React.Component {
     axios.get(url).then(response => {
       if (response.status !== 200) {
         throw new Error('Uh oh, something went wrong');
-        return;
       }
 
       const newVids = this.state.videos.concat(response.data.items);
@@ -58,9 +57,6 @@ class Home extends React.Component {
         videos: newVids,
         nextPageToken: response.data.nextPageToken,
       });
-
-      // console.log(response);
-      // console.log(this.state);
     });
   }
 

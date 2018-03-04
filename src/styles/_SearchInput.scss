@@ -2,12 +2,18 @@
   display: flex;
   align-items: center;
   height: 40px;
+  ::-webkit-input-placeholder {
+    color: #efefef;
+  }
   &__icon {
+    height: 100%;
+    background-color: transparent;
+    color: $white;
     font-size: 30px;
     cursor: pointer;
   }
-  ::-webkit-input-placeholder {
-    color: #efefef;
+  form {
+    height: 100%;
   }
   input {
     @include transition;
@@ -16,9 +22,9 @@
     font-size: 14px;
     border: none;
     background-color: transparent;
-    color: white;
+    color: $white;
     font-size: 16px;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid $white;
     outline: none;
     width: 0;
     &.show {
@@ -26,9 +32,5 @@
       padding: 10px;
       margin-left: 10px;
     }
-  }
-  button {
-    height: 100%;
-    background-color: transparent;
   }
 }

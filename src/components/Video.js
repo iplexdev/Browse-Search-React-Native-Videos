@@ -27,6 +27,7 @@ class Video extends React.Component {
           <div className="Video__published">
             {moment(snippet.publishedAt).fromNow()}
           </div>
+          <p className="Video__description">{snippet.description}</p>
         </div>
       </Link>
     );

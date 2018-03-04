@@ -30,15 +30,9 @@ class VideoSingle extends React.Component {
     axios.get(this.url).then(response => {
       if (response.status !== 200) {
         throw new Error('Uh oh, something went wrong');
-        return;
       }
 
-      this.setState({
-        video: response.data.items[0],
-      });
-
-      // console.log(response);
-      // console.log(this.state);
+      this.setState({ video: response.data.items[0] });
     });
   }
 
@@ -57,7 +51,7 @@ class VideoSingle extends React.Component {
           <div className="VideoSingle__title">{snippet.title}</div>
           <div className="VideoSingle__channel">{snippet.channelTitle}</div>
           <div className="VideoSingle__published">
-            {moment(snippet.publishedAt).format('MMMM D, YYYY')}
+            Published on {moment(snippet.publishedAt).format('MMMM D, YYYY')}
           </div>
           <p className="VideoSingle__description">{snippet.description}</p>
         </div>

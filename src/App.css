@@ -70,11 +70,16 @@ ol {
   display: flex;
   align-items: center;
   height: 40px; }
-  .SearchInput__icon {
-    font-size: 30px;
-    cursor: pointer; }
   .SearchInput ::-webkit-input-placeholder {
     color: #efefef; }
+  .SearchInput__icon {
+    height: 100%;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 30px;
+    cursor: pointer; }
+  .SearchInput form {
+    height: 100%; }
   .SearchInput input {
     transition: all 0.25s ease-in-out;
     height: 100%;
@@ -82,18 +87,15 @@ ol {
     font-size: 14px;
     border: none;
     background-color: transparent;
-    color: white;
+    color: #ffffff;
     font-size: 16px;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid #ffffff;
     outline: none;
     width: 0; }
     .SearchInput input.show {
       width: 250px;
       padding: 10px;
       margin-left: 10px; }
-  .SearchInput button {
-    height: 100%;
-    background-color: transparent; }
 
 .Home {
   display: grid;
@@ -115,7 +117,8 @@ ol {
   border: 1px solid #efefef;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05); }
   .Video:hover {
-    background-color: #efefef; }
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1); }
   .Video__thumbnail {
     width: 100%; }
   .Video__details {
@@ -127,10 +130,20 @@ ol {
     margin-bottom: 10px; }
   .Video__channel {
     color: #777777;
+    font-size: 15px;
+    font-weight: 500;
     margin-bottom: 7px; }
   .Video__published {
     color: #777777;
-    font-size: 12px; }
+    font-size: 13px; }
+  .Video__description {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #777777;
+    font-size: 13px;
+    margin-top: 20px; }
 
 .VideoSingle {
   margin: 0 auto;
@@ -161,8 +174,10 @@ ol {
     margin-bottom: 5px; }
   .VideoSingle__published {
     color: #777777;
-    font-size: 14px; }
+    font-size: 14px;
+    margin-bottom: 30px; }
   .VideoSingle__description {
+    color: #777777;
     font-size: 14px;
     line-height: 1.3;
     margin-bottom: 50px; }
@@ -177,7 +192,7 @@ ol {
 .mnml-spinner {
   border-radius: 100%;
   border-style: solid;
-  border-width: 0.25rem;
+  border-width: 0.5rem;
   height: 5rem;
   width: 5rem;
   animation: basic 1s infinite linear; }
