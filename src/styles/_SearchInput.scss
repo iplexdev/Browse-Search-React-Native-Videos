@@ -2,19 +2,29 @@
   display: flex;
   align-items: center;
   height: 40px;
+  &__icon {
+    font-size: 30px;
+    cursor: pointer;
+  }
   input {
+    @include transition;
     height: 100%;
-    padding: 10px;
+    padding: 0px;
     font-size: 14px;
     border: none;
     background-color: transparent;
     color: white;
-    border: 2px solid white;
+    font-size: 16px;
+    border-bottom: 2px solid white;
+    width: 0;
+    &.show {
+      width: 300px;
+      padding: 10px;
+      margin-left: 10px;
+    }
   }
   button {
     height: 100%;
     background-color: transparent;
-    border: 2px solid white;
-    color: white;
   }
 }

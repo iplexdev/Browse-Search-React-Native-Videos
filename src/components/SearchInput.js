@@ -6,6 +6,8 @@ class SearchInput extends React.Component {
     super();
 
     this.onChange = this.onChange.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
+    this.toggleInput = this.toggleInput.bind(this);
     this.search = this.search.bind(this);
 
     this.state = {
@@ -19,6 +21,17 @@ class SearchInput extends React.Component {
     this.setState({ term: e.target.value });
   }
 
+  onKeyUp(e) {
+    if (e.keyCode === 13) {
+      console.log('hi');
+      this.search();
+    }
+  }
+
+  toggleInput() {
+    this.setState({ toggle: !this.state.toggle });
+  }
+
   search() {
     this.setState({ submitted: true });
   }
@@ -26,10 +39,16 @@ class SearchInput extends React.Component {
   render() {
     return (
       <div className="SearchInput">
-        <input type="text" placeholder="Search" onChange={this.onChange} />
-        <button onClick={this.search} type="button">
-          Go
+        <button className="SearchInput__icon" onClick={this.toggleInput}>
+          🔍
         </button>
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={this.onChange}
+          onKeyUp={this.onKeyUp}
+          className={this.state.toggle ? 'show' : ''}
+        />
         {this.state.submitted && (
           <Switch>
             <Redirect
