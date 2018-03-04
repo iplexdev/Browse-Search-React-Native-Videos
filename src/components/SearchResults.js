@@ -16,6 +16,11 @@ class SearchResults extends React.Component {
       this.query
     }`;
 
+    this.throttleTimer = null;
+    this.throttleDelay = 100;
+
+    this.onScroll = this.onScroll.bind(this);
+
     this.state = {
       url: this.url,
       videos: [],
@@ -33,10 +38,16 @@ class SearchResults extends React.Component {
   }
 
   onScroll() {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      // this is being called every scroll, find a way to debounce this
-      // this.getMoreVideos();
-    }
+    let _this = this;
+    clearTimeout(_this.throttleTimer);
+    _this.throttleTimer = setTimeout(function() {
+      console.log('scroll');
+
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        // this is being called every scroll, find a way to debounce this
+        _this.getMoreVideos();
+      }
+    }, _this.throttleDelay);
   }
 
   getVideos(url) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 
 class SearchInput extends React.Component {
   constructor() {
@@ -20,22 +20,10 @@ class SearchInput extends React.Component {
   }
 
   search() {
-    console.log(this.state.term);
     this.setState({ submitted: true });
   }
 
   render() {
-    if (this.state.submitted) {
-      return (
-        <Redirect
-          to={{
-            pathname: `/search/${this.state.term}`,
-            state: { term: this.state.term },
-          }}
-        />
-      );
-    }
-
     return (
       <div className="SearchInput">
         <input type="text" placeholder="Search" onChange={this.onChange} />
@@ -43,12 +31,14 @@ class SearchInput extends React.Component {
           Go
         </button>
         {this.state.submitted && (
-          <Redirect
-            to={{
-              pathname: `/search/${this.state.term}`,
-              state: { term: this.state.term },
-            }}
-          />
+          <Switch>
+            <Redirect
+              to={{
+                pathname: `/search/${this.state.term}`,
+                state: { term: this.state.term },
+              }}
+            />
+          </Switch>
         )}
       </div>
     );
