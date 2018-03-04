@@ -1,2 +1,11 @@
 .SearchResults {
+  max-width: 700px;
+  margin: 0 auto;
+  .Video {
+    display: flex;
+    margin-bottom: 20px;
+    &__thumbnail {
+      width: auto;
+    }
+  }
 }

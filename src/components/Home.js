@@ -15,7 +15,7 @@ class Home extends React.Component {
 
     this.state = {
       url: this.url,
-      vids: [],
+      videos: [],
       nextPageToken: '',
     };
   }
@@ -38,10 +38,10 @@ class Home extends React.Component {
 
   getVideos(url) {
     axios.get(url).then(response => {
-      const newVids = this.state.vids.concat(response.data.items);
+      const newVids = this.state.videos.concat(response.data.items);
 
       this.setState({
-        vids: newVids,
+        videos: newVids,
         nextPageToken: response.data.nextPageToken,
       });
 
@@ -60,7 +60,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="Home">
-        {this.state.vids.map((item, index) => (
+        {this.state.videos.map((item, index) => (
           <Video key={index} video={item} />
         ))}
       </div>
