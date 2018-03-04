@@ -17,17 +17,19 @@ class SearchInput extends React.Component {
     };
   }
 
+  // update query term
   onChange(e) {
     this.setState({ term: e.target.value });
   }
 
+  // check if enter button was hit
   onKeyUp(e) {
     if (e.keyCode === 13) {
-      console.log('hi');
       this.search();
     }
   }
 
+  // toggle input by clicking on icon
   toggleInput() {
     this.setState({ toggle: !this.state.toggle });
   }
@@ -40,7 +42,9 @@ class SearchInput extends React.Component {
     return (
       <div className="SearchInput">
         <button className="SearchInput__icon" onClick={this.toggleInput}>
-          🔍
+          <span role="img" aria-label="magnifying glass">
+            🔍
+          </span>
         </button>
         <input
           type="text"

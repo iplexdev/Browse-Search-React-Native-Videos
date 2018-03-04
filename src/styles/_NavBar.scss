@@ -1,9 +1,13 @@
 .NavBar {
+  @include flex-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
   background: $black;
   color: $white;
   padding: 15px 20px;
-  @include flex-between;
-  align-items: center;
+  z-index: 10;
 
   .home {
     color: $white;

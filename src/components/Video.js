@@ -16,7 +16,11 @@ class Video extends React.Component {
         id={this.props.video.id.videoId}
         className="Video"
       >
-        <img src={snippet.thumbnails.medium.url} className="Video__thumbnail" />
+        <img
+          src={snippet.thumbnails.medium.url}
+          className="Video__thumbnail"
+          alt="thumbnail"
+        />
         <div className="Video__details">
           <div className="Video__title">{snippet.title}</div>
           <div className="Video__channel">{snippet.channelTitle}</div>
