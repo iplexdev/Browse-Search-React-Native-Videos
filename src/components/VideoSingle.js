@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import Video from './Video';
+import Comment from './Comment';
 import Loader from './Loader';
 
 class VideoSingle extends React.Component {
@@ -8,17 +10,25 @@ class VideoSingle extends React.Component {
     super(props);
 
     this.videoId = props.videoId;
-    this.apiUrl = `https://www.googleapis.com/youtube/v3/videos`;
+    this.apiVideos = `https://www.googleapis.com/youtube/v3/videos`;
+    this.apiSearch = `https://www.googleapis.com/youtube/v3/search`;
+    this.apiComments = `https://www.googleapis.com/youtube/v3/commentThreads`;
     this.apiKey = `AIzaSyBeimXtjgzfQcogY-fP8_CHPybmLpFaieo`;
-    this.parts = `contentDetails,player,snippet`;
-    this.url = `${this.apiUrl}?key=${this.apiKey}&id=${this.videoId}&part=${
-      this.parts
-    }`;
+    this.videosUrl = `${this.apiVideos}?key=${this.apiKey}&id=${
+      this.videoId
+    }&part=contentDetails,player,snippet,statistics`;
+
+    this.commentsUrl = `${this.apiComments}?key=${this.apiKey}&videoId=${
+      this.videoId
+    }&part=id,snippet`;
 
     this.state = {
       id: this.videoId,
-      url: this.url,
+      videosUrl: this.videosUrl,
       video: {},
+      channelVideosUrl: ``,
+      channelVideos: [],
+      comments: [],
     };
   }
 
@@ -27,33 +37,83 @@ class VideoSingle extends React.Component {
   }
 
   getVideo() {
-    axios.get(this.url).then(response => {
+    axios
+      .get(this.videosUrl)
+      .then(response => {
+        if (response.status !== 200) {
+          throw new Error('Uh oh, something went wrong');
+        }
+
+        const video = response.data.items[0];
+        this.setState({
+          video: video,
+          channelVideosUrl: `${this.apiSearch}?key=${this.apiKey}&channelId=${
+            video.snippet.channelId
+          }&part=snippet,id&order=date`,
+        });
+      })
+      .then(response => {
+        this.getChannelVideos();
+        this.getComments();
+      });
+  }
+
+  getChannelVideos() {
+    axios.get(this.state.channelVideosUrl).then(response => {
       if (response.status !== 200) {
         throw new Error('Uh oh, something went wrong');
       }
+      this.setState({ channelVideos: response.data.items });
+    });
+  }
 
-      this.setState({ video: response.data.items[0] });
+  getComments() {
+    axios.get(this.commentsUrl).then(response => {
+      if (response.status !== 200) {
+        throw new Error('Uh oh, something went wrong');
+      }
+      this.setState({ comments: response.data.items });
     });
   }
 
   render() {
-    const { snippet } = this.state.video;
+    const { player, snippet, statistics } = this.state.video;
 
     return snippet ? (
       <div className="VideoSingle">
-        <div
-          className="VideoSingle__player"
-          dangerouslySetInnerHTML={{
-            __html: this.state.video.player.embedHtml,
-          }}
-        />
-        <div className="VideoSingle__details">
-          <div className="VideoSingle__title">{snippet.title}</div>
-          <div className="VideoSingle__channel">{snippet.channelTitle}</div>
-          <div className="VideoSingle__published">
-            Published on {moment(snippet.publishedAt).format('MMMM D, YYYY')}
+        <div className="VideoSingle__main">
+          <div
+            className="VideoSingle__player"
+            dangerouslySetInnerHTML={{
+              __html: player.embedHtml,
+            }}
+          />
+          <div className="VideoSingle__details">
+            <h1 className="VideoSingle__title">{snippet.title}</h1>
+            <div className="VideoSingle__detail-wrapper">
+              <div className="VideoSingle__channel">{snippet.channelTitle}</div>
+              <div className="VideoSingle__views">
+                {statistics.viewCount} Views
+              </div>
+            </div>
+            <div className="VideoSingle__published">
+              Published on {moment(snippet.publishedAt).format('MMMM D, YYYY')}
+            </div>
+            <p className="VideoSingle__description">{snippet.description}</p>
           </div>
-          <p className="VideoSingle__description">{snippet.description}</p>
+
+          <div className="VideoSingle__comments">
+            {this.state.comments.map((item, index) => (
+              <Comment key={index} video={item} />
+            ))}
+          </div>
+        </div>
+
+        <div className="VideoSingle__channelvids">
+          <h2>Other videos from this channel</h2>
+          {this.state.channelVideos.map((item, index) => (
+            <Video key={index} video={item} />
+          ))}
         </div>
       </div>
     ) : (
