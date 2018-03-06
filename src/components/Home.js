@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Video from './Video';
+import VideoCard from './VideoCard';
 import Loader from './Loader';
 
 class Home extends React.Component {
@@ -71,7 +71,7 @@ class Home extends React.Component {
     return this.state.videos.length ? (
       <div className="Home">
         {this.state.videos.map((item, index) => (
-          <Video key={index} video={item} />
+          <VideoCard key={index} video={item} />
         ))}
       </div>
     ) : (

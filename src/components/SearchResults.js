@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Video from './Video';
+import VideoCard from './VideoCard';
 import Loader from './Loader';
 
 class SearchResults extends React.Component {
@@ -76,7 +76,7 @@ class SearchResults extends React.Component {
         <h2>Showing results for '{this.query}'</h2>
 
         {this.state.videos.map((item, index) => (
-          <Video key={index} video={item} />
+          <VideoCard key={index} video={item} />
         ))}
       </div>
     ) : (

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-class Video extends React.Component {
+class VideoCard extends React.Component {
   videoURL(id) {
     return `/video/${id}`;
   }
@@ -34,4 +34,4 @@ class Video extends React.Component {
   }
 }
 
-export default Video;
+export default VideoCard;

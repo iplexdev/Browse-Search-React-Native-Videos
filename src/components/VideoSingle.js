@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import Video from './Video';
+import VideoCard from './VideoCard';
 import Comment from './Comment';
 import Loader from './Loader';
 
@@ -14,7 +14,7 @@ class VideoSingle extends React.Component {
     this.apiSearch = `https://www.googleapis.com/youtube/v3/search`;
     this.apiComments = `https://www.googleapis.com/youtube/v3/commentThreads`;
     this.apiKey = `AIzaSyBeimXtjgzfQcogY-fP8_CHPybmLpFaieo`;
-    this.videosUrl = `${this.apiVideos}?key=${this.apiKey}&id=${
+    this.videoUrl = `${this.apiVideos}?key=${this.apiKey}&id=${
       this.videoId
     }&part=contentDetails,player,snippet,statistics`;
 
@@ -24,21 +24,28 @@ class VideoSingle extends React.Component {
 
     this.state = {
       id: this.videoId,
-      videosUrl: this.videosUrl,
+      videosUrl: this.videoUrl,
       video: {},
       channelVideosUrl: ``,
       channelVideos: [],
       comments: [],
     };
+
+    this.getVideo = this.getVideo.bind(this);
+    this.onVideoLoad = this.onVideoLoad.bind(this);
   }
 
   componentDidMount() {
     this.getVideo();
   }
 
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
   getVideo() {
     axios
-      .get(this.videosUrl)
+      .get(this.videoUrl)
       .then(response => {
         if (response.status !== 200) {
           throw new Error('Uh oh, something went wrong');
@@ -53,27 +60,31 @@ class VideoSingle extends React.Component {
         });
       })
       .then(response => {
-        this.getChannelVideos();
-        this.getComments();
+        this.onVideoLoad();
       });
   }
 
   getChannelVideos() {
-    axios.get(this.state.channelVideosUrl).then(response => {
-      if (response.status !== 200) {
-        throw new Error('Uh oh, something went wrong');
-      }
-      this.setState({ channelVideos: response.data.items });
-    });
+    return axios.get(this.state.channelVideosUrl);
   }
 
   getComments() {
-    axios.get(this.commentsUrl).then(response => {
-      if (response.status !== 200) {
-        throw new Error('Uh oh, something went wrong');
-      }
-      this.setState({ comments: response.data.items });
-    });
+    return axios.get(this.commentsUrl);
+  }
+
+  onVideoLoad() {
+    const _this = this;
+    axios.all([_this.getChannelVideos(), _this.getComments()]).then(
+      axios.spread((videos, comments) => {
+        if (videos.status !== 200 || comments.status !== 200) {
+          throw new Error('Uh oh, something went wrong');
+        }
+        _this.setState({
+          channelVideos: videos.data.items,
+          comments: comments.data.items,
+        });
+      })
+    );
   }
 
   render() {
@@ -93,7 +104,7 @@ class VideoSingle extends React.Component {
             <div className="VideoSingle__detail-wrapper">
               <div className="VideoSingle__channel">{snippet.channelTitle}</div>
               <div className="VideoSingle__views">
-                {statistics.viewCount} Views
+                {this.numberWithCommas(statistics.viewCount)} Views
               </div>
             </div>
             <div className="VideoSingle__published">
@@ -101,20 +112,28 @@ class VideoSingle extends React.Component {
             </div>
             <p className="VideoSingle__description">{snippet.description}</p>
           </div>
+          {this.state.comments.length ? (
+            <div className="VideoSingle__comments">
+              <h3>Comments</h3>
+              {this.state.comments.map((item, index) => (
+                <Comment key={index} video={item} />
+              ))}
+            </div>
+          ) : (
+            <Loader />
+          )}
+        </div>
 
-          <div className="VideoSingle__comments">
-            {this.state.comments.map((item, index) => (
-              <Comment key={index} video={item} />
+        {this.state.channelVideos.length ? (
+          <div className="VideoSingle__channelvids">
+            <h2>Other videos from this channel</h2>
+            {this.state.channelVideos.map((item, index) => (
+              <VideoCard key={index} video={item} />
             ))}
           </div>
-        </div>
-
-        <div className="VideoSingle__channelvids">
-          <h2>Other videos from this channel</h2>
-          {this.state.channelVideos.map((item, index) => (
-            <Video key={index} video={item} />
-          ))}
-        </div>
+        ) : (
+          <Loader />
+        )}
       </div>
     ) : (
       <Loader />
