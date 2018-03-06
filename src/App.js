@@ -18,21 +18,16 @@ class App extends Component {
           <main>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/search/:query" component={SearchResults} />
               <Route
                 path="/search/:query"
-                render={routeProps => {
-                  return (
-                    <SearchResults query={routeProps.match.params.query} />
-                  );
+                render={props => {
+                  return <SearchResults query={props.match.params.query} />;
                 }}
               />
               <Route
                 path="/video/:videoId"
-                render={routeProps => {
-                  return (
-                    <VideoSingle videoId={routeProps.match.params.videoId} />
-                  );
+                render={props => {
+                  return <VideoSingle videoId={props.match.params.videoId} />;
                 }}
               />
               <Route render={props => <div className="notfound">404</div>} />
