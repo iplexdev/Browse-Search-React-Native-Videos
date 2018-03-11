@@ -46,7 +46,7 @@ class SearchInput extends React.Component {
 
   render() {
     return (
-      <div className="SearchInput">
+      <div className={this.state.toggle ? 'SearchInput show' : 'SearchInput'}>
         <button className="SearchInput__icon" onClick={this.toggleInput}>
           <span role="img" aria-label="magnifying glass">
             🔍
@@ -58,7 +58,6 @@ class SearchInput extends React.Component {
             placeholder="Search 🤙"
             onChange={this.onChange}
             onKeyUp={this.onKeyUp}
-            className={this.state.toggle ? 'show' : ''}
           />
         </form>
         {this.state.submitted && (

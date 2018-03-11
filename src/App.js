@@ -25,6 +25,7 @@ class App extends Component {
                 }}
               />
               <Route
+                exact
                 path="/video/:videoId"
                 render={props => {
                   return <VideoSingle videoId={props.match.params.videoId} />;

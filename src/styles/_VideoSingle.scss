@@ -9,6 +9,9 @@
   @media (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
+  &__main {
+    overflow: hidden;
+  }
   &__player {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
@@ -18,8 +21,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100% !important;
+      height: 100% !important;
     }
   }
   .Video {
@@ -67,8 +70,10 @@
     }
     h2 {
       font-size: 16px;
-      font-weight: 500;
       margin: 0 0 20px;
+    }
+    .VideoCard {
+      margin-bottom: 30px;
     }
   }
 }

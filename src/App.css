@@ -23,6 +23,9 @@ body {
 main {
   margin-top: 70px;
   padding: 50px; }
+  @media (max-width: 480px) {
+    main {
+      padding: 30px; } }
 
 a {
   transition: all 0.25s ease-in-out;
@@ -64,24 +67,35 @@ img {
   color: #ffffff;
   padding: 15px 20px;
   z-index: 10; }
+  @media (max-width: 480px) {
+    .NavBar {
+      padding: 15px; } }
   .NavBar .home {
     color: #ffffff;
     font-size: 30px;
     font-weight: 700; }
+    @media (max-width: 480px) {
+      .NavBar .home {
+        font-size: 20px; } }
 
 .SearchInput {
   display: flex;
   align-items: center;
   height: 40px; }
-  .SearchInput ::-webkit-input-placeholder {
-    color: #efefef; }
+  .SearchInput.show input {
+    width: 250px;
+    padding: 10px; }
   .SearchInput__icon {
     height: 100%;
     background-color: transparent;
     color: #ffffff;
     font-size: 30px;
     cursor: pointer; }
+    @media (max-width: 480px) {
+      .SearchInput__icon {
+        font-size: 20px; } }
   .SearchInput form {
+    width: 100%;
     height: 100%; }
   .SearchInput input {
     transition: all 0.25s ease-in-out;
@@ -95,53 +109,55 @@ img {
     border-bottom: 2px solid #ffffff;
     outline: none;
     width: 0; }
-    .SearchInput input.show {
-      width: 250px;
-      padding: 10px;
-      margin-left: 10px; }
+  .SearchInput ::-webkit-input-placeholder {
+    color: #efefef; }
 
 .Home {
   display: grid;
   grid-template-columns: repeat(auto-fill, 400px);
   grid-gap: 30px;
   justify-content: center; }
+  @media (max-width: 480px) {
+    .Home {
+      grid-template-columns: repeat(auto-fill, 100%); } }
 
 .SearchResults {
   max-width: 700px;
   margin: 0 auto; }
-  .SearchResults .Video {
+  .SearchResults .VideoCard {
     display: flex;
     margin-bottom: 20px; }
-    .SearchResults .Video__thumbnail {
+    .SearchResults .VideoCard__thumbnail {
       width: auto; }
 
-.Video {
+.VideoCard {
   transition: all 0.25s ease-in-out;
   border: 1px solid #efefef;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05); }
-  .Video:hover {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+  width: 100%; }
+  .VideoCard:hover {
     transform: translateY(-5px);
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1); }
-  .Video__thumbnail {
+  .VideoCard__thumbnail {
     width: 100%; }
-  .Video__details {
+  .VideoCard__details {
     padding: 20px;
     width: 100%;
     overflow: hidden; }
-  .Video__title {
+  .VideoCard__title {
     color: #000000;
     font-size: 17px;
     font-weight: 600;
     margin-bottom: 10px; }
-  .Video__channel {
+  .VideoCard__channel {
     color: #555555;
     font-size: 15px;
     font-weight: 500;
     margin-bottom: 5px; }
-  .Video__published {
+  .VideoCard__published {
     color: #777777;
     font-size: 13px; }
-  .Video__description {
+  .VideoCard__description {
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -161,6 +177,8 @@ img {
   @media (max-width: 1000px) {
     .VideoSingle {
       grid-template-columns: 1fr; } }
+  .VideoSingle__main {
+    overflow: hidden; }
   .VideoSingle__player {
     position: relative;
     padding-bottom: 56.25%;
@@ -171,8 +189,8 @@ img {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%; }
+      width: 100% !important;
+      height: 100% !important; }
   .VideoSingle .Video {
     display: block;
     margin-bottom: 20px; }
@@ -209,8 +227,9 @@ img {
       display: none; } }
   .VideoSingle__channelvids h2 {
     font-size: 16px;
-    font-weight: 500;
     margin: 0 0 20px; }
+  .VideoSingle__channelvids .VideoCard {
+    margin-bottom: 30px; }
 
 .Loader {
   width: 100%;

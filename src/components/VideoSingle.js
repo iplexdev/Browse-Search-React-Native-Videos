@@ -24,7 +24,7 @@ class VideoSingle extends React.Component {
 
     this.state = {
       id: this.videoId,
-      videosUrl: this.videoUrl,
+      videoUrl: this.videoUrl,
       video: {},
       channelVideosUrl: ``,
       channelVideos: [],
@@ -36,16 +36,27 @@ class VideoSingle extends React.Component {
   }
 
   componentDidMount() {
-    this.getVideo();
+    this.getVideo(this.state.videoUrl);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.videoId !== this.state.videoUrl) {
+      const newVidUrl = `${this.apiVideos}?key=${this.apiKey}&id=${
+        nextProps.videoId
+      }&part=contentDetails,player,snippet,statistics`;
+      this.setState({ videoUrl: newVidUrl });
+      this.getVideo(newVidUrl);
+      console.log(newVidUrl);
+    }
   }
 
   numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
-  getVideo() {
+  getVideo(url) {
     axios
-      .get(this.videoUrl)
+      .get(url)
       .then(response => {
         if (response.status !== 200) {
           throw new Error('Uh oh, something went wrong');

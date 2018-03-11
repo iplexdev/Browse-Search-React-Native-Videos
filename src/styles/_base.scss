@@ -27,6 +27,9 @@ body {
 main {
   margin-top: 70px;
   padding: 50px;
+  @media (max-width: 480px) {
+    padding: 30px;
+  }
 }
 
 a {

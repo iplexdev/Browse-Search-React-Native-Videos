@@ -14,20 +14,20 @@ class VideoCard extends React.Component {
       <Link
         to={this.videoURL(this.props.video.id.videoId)}
         id={this.props.video.id.videoId}
-        className="Video"
+        className="VideoCard"
       >
         <img
           src={snippet.thumbnails.medium.url}
-          className="Video__thumbnail"
+          className="VideoCard__thumbnail"
           alt="thumbnail"
         />
-        <div className="Video__details">
-          <div className="Video__title">{snippet.title}</div>
-          <div className="Video__channel">{snippet.channelTitle}</div>
-          <div className="Video__published">
+        <div className="VideoCard__details">
+          <div className="VideoCard__title">{snippet.title}</div>
+          <div className="VideoCard__channel">{snippet.channelTitle}</div>
+          <div className="VideoCard__published">
             {moment(snippet.publishedAt).fromNow()}
           </div>
-          <p className="Video__description">{snippet.description}</p>
+          <p className="VideoCard__description">{snippet.description}</p>
         </div>
       </Link>
     );
