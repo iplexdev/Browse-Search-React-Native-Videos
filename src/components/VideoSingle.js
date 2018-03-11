@@ -18,16 +18,13 @@ class VideoSingle extends React.Component {
       this.videoId
     }&part=contentDetails,player,snippet,statistics`;
 
-    this.commentsUrl = `${this.apiComments}?key=${this.apiKey}&videoId=${
-      this.videoId
-    }&part=id,snippet`;
-
     this.state = {
-      id: this.videoId,
+      videoId: this.videoId,
       videoUrl: this.videoUrl,
       video: {},
       channelVideosUrl: ``,
       channelVideos: [],
+      commentsUrl: ``,
       comments: [],
     };
 
@@ -40,13 +37,13 @@ class VideoSingle extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.videoId !== this.state.videoUrl) {
-      const newVidUrl = `${this.apiVideos}?key=${this.apiKey}&id=${
+    if (nextProps.videoId !== this.state.id) {
+      const videoId = nextProps.videoId;
+      const videoUrl = `${this.apiVideos}?key=${this.apiKey}&id=${
         nextProps.videoId
       }&part=contentDetails,player,snippet,statistics`;
-      this.setState({ videoUrl: newVidUrl });
-      this.getVideo(newVidUrl);
-      console.log(newVidUrl);
+      this.setState({ videoId, videoUrl });
+      this.getVideo(videoUrl);
     }
   }
 
@@ -63,11 +60,17 @@ class VideoSingle extends React.Component {
         }
 
         const video = response.data.items[0];
+        const channelVideosUrl = `${this.apiSearch}?key=${
+          this.apiKey
+        }&channelId=${video.snippet.channelId}&part=snippet,id&order=date`;
+        const commentsUrl = `${this.apiComments}?key=${this.apiKey}&videoId=${
+          video.id
+        }&part=id,snippet`;
+
         this.setState({
-          video: video,
-          channelVideosUrl: `${this.apiSearch}?key=${this.apiKey}&channelId=${
-            video.snippet.channelId
-          }&part=snippet,id&order=date`,
+          video,
+          channelVideosUrl,
+          commentsUrl,
         });
       })
       .then(response => {
@@ -80,7 +83,7 @@ class VideoSingle extends React.Component {
   }
 
   getComments() {
-    return axios.get(this.commentsUrl);
+    return axios.get(this.state.commentsUrl);
   }
 
   onVideoLoad() {
