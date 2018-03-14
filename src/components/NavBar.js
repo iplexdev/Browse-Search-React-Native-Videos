@@ -5,22 +5,26 @@ class NavBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onChange = this.onChange.bind(this);
-    this.onKeyUp = this.onKeyUp.bind(this);
-    this.toggleInput = this.toggleInput.bind(this);
-    this.search = this.search.bind(this);
-
     this.state = {
       term: '',
       submitted: false,
       toggle: false,
     };
+
+    this.onChange = this.onChange.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
+    this.toggleInput = this.toggleInput.bind(this);
+    this.search = this.search.bind(this);
   }
 
   componentDidUpdate() {
+    const input = document.querySelector('.SearchInput input');
     if (this.state.toggle) {
-      document.querySelector('.SearchInput input').focus();
+      input.focus();
     }
+    input.addEventListener('focusout', () => {
+      this.setState({ toggle: false });
+    });
   }
 
   // toggle input by clicking on icon
