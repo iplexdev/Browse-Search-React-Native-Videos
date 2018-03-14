@@ -20,13 +20,13 @@ class SearchResults extends React.Component {
     this.throttleTimer = null;
     this.throttleDelay = 100;
 
-    this.onScroll = this.onScroll.bind(this);
-
     this.state = {
       url: this.url,
       videos: [],
       nextPageToken: '',
     };
+
+    this.onScroll = this.onScroll.bind(this);
   }
 
   componentDidMount() {
@@ -41,7 +41,8 @@ class SearchResults extends React.Component {
   onScroll() {
     let _this = this;
     clearTimeout(_this.throttleTimer);
-    _this.throttleTimer = setTimeout(function() {
+    _this.throttleTimer = setTimeout(() => {
+      // if scrolled to the bottom
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         _this.getMoreVideos();
       }

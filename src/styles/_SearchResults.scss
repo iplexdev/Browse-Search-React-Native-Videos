@@ -1,11 +1,28 @@
 .SearchResults {
   max-width: 700px;
   margin: 0 auto;
+  h2 {
+    margin-bottom: 50px;
+  }
   .VideoCard {
     display: flex;
     margin-bottom: 20px;
+    @media (max-width: 768px) {
+      display: block;
+    }
     &__thumbnail {
-      width: auto;
+      display: flex;
+      width: 100%;
+      @media (max-width: 768px) {
+        display: block;
+      }
+      img {
+        width: auto;
+        object-fit: cover;
+        @media (max-width: 768px) {
+          width: 100%;
+        }
+      }
     }
   }
 }

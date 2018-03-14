@@ -18,6 +18,9 @@ class VideoSingle extends React.Component {
       this.videoId
     }&part=contentDetails,player,snippet,statistics`;
 
+    this.throttleTimer = null;
+    this.throttleDelay = 100;
+
     this.state = {
       videoId: this.videoId,
       videoUrl: this.videoUrl,
@@ -30,10 +33,16 @@ class VideoSingle extends React.Component {
 
     this.getVideo = this.getVideo.bind(this);
     this.onVideoLoad = this.onVideoLoad.bind(this);
+    this.onScroll = this.onScroll.bind(this);
   }
 
   componentDidMount() {
     this.getVideo(this.state.videoUrl);
+    window.addEventListener('scroll', this.onScroll.bind(this), false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, false);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -49,6 +58,17 @@ class VideoSingle extends React.Component {
 
   numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  onScroll() {
+    let _this = this;
+    clearTimeout(_this.throttleTimer);
+    _this.throttleTimer = setTimeout(() => {
+      // if scrolled to the bottom load more comments
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        // _this.onVideoLoad();
+      }
+    }, _this.throttleDelay);
   }
 
   getVideo(url) {

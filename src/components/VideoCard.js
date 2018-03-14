@@ -16,11 +16,9 @@ class VideoCard extends React.Component {
         id={this.props.video.id.videoId}
         className="VideoCard"
       >
-        <img
-          src={snippet.thumbnails.medium.url}
-          className="VideoCard__thumbnail"
-          alt="thumbnail"
-        />
+        <div className="VideoCard__thumbnail">
+          <img src={snippet.thumbnails.medium.url} alt="thumbnail" />
+        </div>
         <div className="VideoCard__details">
           <div className="VideoCard__title">{snippet.title}</div>
           <div className="VideoCard__channel">{snippet.channelTitle}</div>
