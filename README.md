@@ -1,6 +1,6 @@
 # Browse/Search Surf Videos
 
-you can use whatever frameworks you’d like. we use React here at drift and have found create-react-app to be a great way to get started. 
+you can use whatever frameworks you’d like. we use React here at drift and have found create-react-app to be a great way to get started.
 
 To get started just fork this repo and get hacking, try to commit often, the goal of this exercise is to see your thought process during development.
 
@@ -10,7 +10,7 @@ apikey: ```AIzaSyBeimXtjgzfQcogY-fP8_CHPybmLpFaieo (or generate your own in the 
 
 sample request:
 ```
-https://www.googleapis.com/youtube/v3/search?key=AIzaSyBeimXtjgzfQcogY-fP8_CHPybmLpFaieo&part=snippet&type=video&q=surf 
+https://www.googleapis.com/youtube/v3/search?key=AIzaSyBeimXtjgzfQcogY-fP8_CHPybmLpFaieo&part=snippet&type=video&q=surf
 ```
 
 ## Min Requirements
@@ -25,4 +25,10 @@ https://www.googleapis.com/youtube/v3/search?key=AIzaSyBeimXtjgzfQcogY-fP8_CHPyb
   - allow for sorting and advanced filtering on home page
   - make it sexy
   - go crazy with available end points :)
-  
+
+## Getting started
+
+1. nvm install
+2. nvm use
+3. npm install
+4. npm start
