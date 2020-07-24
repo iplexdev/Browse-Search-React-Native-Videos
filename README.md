@@ -28,6 +28,9 @@ https://www.googleapis.com/youtube/v3/search?key=`generate your own in the googl
 
 ## Getting started
  To get started just fork this repo:
-  git clone 
-1. npm install
-2. npm start
+  ```
+1. git clone https://github.com/iplexdev/Browse-Search-React-Native-Videos.git 
+2. npm install
+3. npm start
+
+```
