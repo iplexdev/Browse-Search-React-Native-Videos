@@ -13,7 +13,7 @@ class VideoSingle extends React.Component {
     this.apiVideos = `https://www.googleapis.com/youtube/v3/videos`;
     this.apiSearch = `https://www.googleapis.com/youtube/v3/search`;
     this.apiComments = `https://www.googleapis.com/youtube/v3/commentThreads`;
-    this.apiKey = `AIzaSyBeimXtjgzfQcogY-fP8_CHPybmLpFaieo`;
+    this.apiKey = `AIzaSyDlfQm7nBRAel8gfWKOdv2E_gMRsG14RwE`;
     this.videoUrl = `${this.apiVideos}?key=${this.apiKey}&id=${
       this.videoId
     }&part=contentDetails,player,snippet,statistics`;

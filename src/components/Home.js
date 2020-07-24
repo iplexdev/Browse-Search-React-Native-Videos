@@ -8,11 +8,11 @@ class Home extends React.Component {
     super();
 
     this.apiUrl = `https://www.googleapis.com/youtube/v3/search`;
-    this.apiKey = `AIzaSyBeimXtjgzfQcogY-fP8_CHPybmLpFaieo`;
+    this.apiKey = `AIzaSyDlfQm7nBRAel8gfWKOdv2E_gMRsG14RwE`;
     this.maxResults = `20`;
     this.url = `${this.apiUrl}?key=${
       this.apiKey
-    }&part=snippet&type=video&maxResults=${this.maxResults}&q=surf`;
+    }&part=snippet&type=video&maxResults=${this.maxResults}&q=react native`;
 
     this.throttleTimer = null;
     this.throttleDelay = 100;
@@ -69,6 +69,8 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log('checkVideo', this.state.videos);
+
     return this.state.videos.length ? (
       <div className="Home">
         {this.state.videos.map((item, index) => (

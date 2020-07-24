@@ -52,10 +52,10 @@ class NavBar extends React.Component {
     return (
       <nav className={this.state.toggle ? 'NavBar show-search' : 'NavBar'}>
         <a href="/" className="home">
-          <span>Surf Videos &nbsp;</span>
-          <span role="img" aria-label="surfing">
+          <span>React Native Videos &nbsp;</span>
+          {/* <span role="img" aria-label="surfing">
             🏄‍♂️
-          </span>
+          </span> */}
         </a>
         <div className="SearchInput">
           <button className="SearchInput__icon" onClick={this.toggleInput}>

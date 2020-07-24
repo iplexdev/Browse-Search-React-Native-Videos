@@ -8,12 +8,12 @@ class SearchResults extends React.Component {
     super(props);
 
     this.apiUrl = `https://www.googleapis.com/youtube/v3/search`;
-    this.apiKey = `AIzaSyBeimXtjgzfQcogY-fP8_CHPybmLpFaieo`;
+    this.apiKey = `AIzaSyDlfQm7nBRAel8gfWKOdv2E_gMRsG14RwE`;
     this.maxResults = `20`;
     this.query = props.query;
     this.url = `${this.apiUrl}?key=${
       this.apiKey
-    }&part=snippet&type=video&maxResults=${this.maxResults}&q=surf+${
+    }&part=snippet&type=video&maxResults=${this.maxResults}&q=react native+${
       this.query
     }`;
 
