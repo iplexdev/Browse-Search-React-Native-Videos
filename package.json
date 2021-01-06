@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@nuscout/eslint-config": "^0.2.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "moment": "^2.21.0",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.2",
